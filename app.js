@@ -6,6 +6,7 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var userRouter = require('./routes/user');
 
 var app = express();
 
@@ -21,13 +22,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/users/:id', userRouter);
 
-// catch 404 and forward to error handler
+// catch 404 and forward to error middlewear
 app.use(function(req, res, next) {
   next(createError(404));
 });
 
-// error handler
+// error middlewear
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
