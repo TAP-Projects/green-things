@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "startdev": "nodemon ./bin/www",
-    "startdebug": "DEBUG=learning-postgres:* nodemon ./bin/www"
+    "startdev": "nodemon --inspect ./bin/www",
+    "startdebug": "DEBUG=learning-postgres:* nodemon --inspect ./bin/www"
   },
   "dependencies": {
     "body-parser": "^1.19.0",
