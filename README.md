@@ -1,2 +1,2 @@
 # learning-postgres
-Leaning how to build a node/express app with postgres.
+Leaning how to build a Node and Express app with PostgreSQL.
