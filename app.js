@@ -6,7 +6,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
 
-var indexRouter = require('./routes/index');
+var homeRouter = require('./routes/index');
+var aboutRouter = require('./routes/about');
 var usersRouter = require('./routes/users');
 var userRouter = require('./routes/user');
 
@@ -28,26 +29,27 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/bulma', express.static(path.join(__dirname, 'node_modules/bulma/css')));
 
 // get_breadcrumbs generates breadcrumbs from each route
-get_breadcrumbs = function(url) {
-  // The root is HOME with url /
-  var rtn = [{name: "HOME", url: "/"}],
-  // An accumulator
-      acc = "", // accumulative url
-      arr = url.substring(1).split("/");
+// get_breadcrumbs = function(url) {
+//   // The root is HOME with url /
+//   var rtn = [{name: "HOME", url: "/"}],
+//   // An accumulator
+//       acc = "", // accumulative url
+//       arr = url.substring(1).split("/");
 
-  for (i=0; i<arr.length; i++) {
-      acc = i != arr.length-1 ? acc+"/"+arr[i] : null;
-      rtn[i+1] = {name: arr[i].toUpperCase(), url: acc};
-  }
-  return rtn;
-};
+//   for (i=0; i<arr.length; i++) {
+//       acc = i != arr.length-1 ? acc+"/"+arr[i] : null;
+//       rtn[i+1] = {name: arr[i].toUpperCase(), url: acc};
+//   }
+//   return rtn;
+// };
 
-app.use(function(req, res, next) {
-  req.breadcrumbs = get_breadcrumbs(req.originalUrl);
-  next();
-});
+// app.use(function(req, res, next) {
+//   req.breadcrumbs = get_breadcrumbs(req.originalUrl);
+//   next();
+// });
 
-app.use('/', indexRouter);
+app.use('/', homeRouter);
+app.use('/about', aboutRouter);
 app.use('/users', usersRouter);
 app.use('/users/:id', userRouter);
 
