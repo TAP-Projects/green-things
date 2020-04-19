@@ -5,8 +5,14 @@ html
     link(rel='stylesheet', href='/bulma/bulma.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    include ./includes/navbar.pug
-    .content
-      block content
-    include ./includes/footer.pug
+    .outer-wrapper
+      include ./includes/navbar.pug
+      main.tile.is-parent
+        .tile.is-parent.is-vertical.is-12
+          .tile.is-child.is-horizontal
+            include ./includes/breadcrumbs.pug
+          .tile.is-child.is-horizontal
+            block content
+    .fixed-footer
+      include ./includes/footer.pug
   script(defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js")
