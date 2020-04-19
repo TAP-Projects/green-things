@@ -1,0 +1,35 @@
+block header
+
+    nav.navbar.is-primary(role='navigation', aria-label='main navigation')
+        .navbar-brand
+            a.navbar-item.is-small(href='/') 
+                strong
+                    | Green Things
+            a.navbar-burger.burger(role='button', aria-label='menu', aria-expanded='false', data-target='navbar')
+                span(aria-hidden='true')
+                span(aria-hidden='true')
+                span(aria-hidden='true')
+        #navbar.navbar-menu
+            .navbar-start
+                a.navbar-item
+                    | Home
+                a.navbar-item
+                    | Gallery
+                .navbar-item.has-dropdown.is-hoverable
+                    a.navbar-link
+                        | More
+                        .navbar-dropdown
+                            a.navbar-item(href="about")
+                                | About
+                            a.navbar-item
+                                | Contact
+                            hr.navbar-divider
+                            a.navbar-item
+                                | Report an issue
+            .navbar-end
+            .navbar-item
+                .buttons
+                    a.button.is-white
+                        strong Sign up
+                    a.button.is-light
+                        | Log in

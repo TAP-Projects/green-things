@@ -1,12 +1,20 @@
 # Learning PostgreSQL
 
 ## What is this?
-Things That Are Green is a site that celebrates the color green. Log on, create an account, start listing things that are green. That's it.
+Green Things is a site that celebrates the color green. Create an account. Log in. Check out the gallery. Start adding things that are green.  That's it.
 
-This project focuses on the basics of building out an Express app with PostgreSQL. This is my first Express app that uses PostgresSQL. I've built a similar Express app using SQLite, but never deployed it.
+As you may gathered by now, this is a demonstration project. This project focuses on building out an Express app with PostgreSQL. I've built other apps using SQLite, but this is my first using PostgreSQL, and the first that I've deployed to Heroku.
 
-The app is deployed on Heroku here: 
+The app is deployed here: 
 http://jj-learning-postgres.herokuapp.com
+
+## Features
+
+User can:
+- Create an account
+- Edit account details
+- Add items to the gallery
+- Edit their gallery items
 
 ## Issues
 Please report any issues here:
