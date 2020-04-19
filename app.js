@@ -1,9 +1,9 @@
+var path = require('path');
 var config = require('dotenv').config()
 var createError = require('http-errors');
 var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
 var indexRouter = require('./routes/index');
@@ -13,7 +13,7 @@ var userRouter = require('./routes/user');
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', [path.join(__dirname, 'views'), path.join(__dirname, 'views/pages'), path.join(__dirname, 'views/includes')]);
 app.set('view engine', 'pug');
 
 app.use(logger('dev'));
