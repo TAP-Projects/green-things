@@ -8,6 +8,7 @@ var bodyParser = require('body-parser');
 
 var homeRouter = require('./routes/index');
 var aboutRouter = require('./routes/about');
+var addUserRouter = require('./routes/addUser');
 var usersRouter = require('./routes/users');
 var userRouter = require('./routes/user');
 
@@ -50,6 +51,7 @@ app.use('/bulma', express.static(path.join(__dirname, 'node_modules/bulma/css'))
 
 app.use('/', homeRouter);
 app.use('/about', aboutRouter);
+app.use('/sign-up', addUserRouter);
 app.use('/users', usersRouter);
 app.use('/users/:id', userRouter);
 

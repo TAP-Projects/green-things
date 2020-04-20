@@ -4,9 +4,16 @@
 
 ### Express
 
+#### Misc
+- Write breadcrumb middlewear
+- Write pagination middlewear
+
+
 #### Views
 - Create a form/edit view for green things
 - Create a form/edit view of users
+- Add pagination to gallery and users
+- Add breadcrumbs to non-home pages
 - Switch synchronous functions to async in app and routes
 - DONE: Tell app to look for views in includes & pages directories
 - DONE: Make header and footer includes
@@ -16,6 +23,9 @@
 - DONE: Create an about view
 - DONE: Add Bulma
 - DONE: Create tile layout for about page
+##### Front End JS
+- Write burger script
+- Write the class switching script for the form validation
 #### Routes
 ##### Home, About, etc.
 - DONE: Create home route
