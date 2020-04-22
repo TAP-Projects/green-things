@@ -1,0 +1,59 @@
+extends ../layout
+
+block content
+
+    .column.is-4
+        form.form-horizontal(method='POST' action='/sign-up' enctype='multipart/form-data')
+        fieldset
+            legend.title Create Account
+            #firstName.field
+                label.label(for='first_name') First Name
+                .control
+                    input.input(name='first_name' type='text' placeholder='First name' required='required')
+
+            #lastName.field
+                label.label(for='last_name') Last Name
+                .control
+                    input.input(name='last_name' type='text' placeholder='Last name' required='required')
+
+            #email.field
+                label.label(for='email') Email
+                .control.has-icons-left.has-icons-right
+                    input.input.is-danger(name='email' type='email' placeholder='Email address' value='' required='required')
+                    span.icon.is-small.is-left
+                        i.fas.fa-envelope
+                    span.icon.is-small.is-right
+                        i.fas.fa-exclamation-triangle
+                p.help.is-danger This email is invalid
+
+            #username.field
+                label.label(for='username') Username
+                .control.has-icons-left.has--right
+                    input.input.is-success(name='username' type='text' placeholder='Username' value='Username' required='required' min-length='4' max-length='16')
+                    span.icon.is-small.is-left
+                        i.fas.fa-user
+                    span.icon.is-small.is-right
+                        i.fas.fa-check
+                p.help.is-success This username is available
+                p.help.is-danger This username is not available
+
+            #password.field
+                label.label(for='password') Password Input
+                .control.has-icons-left
+                    input#passwordinput-0.input(name='password' type='password' placeholder='********' required='required' min-length='8' max-length='16')
+                    span.icon.is-small.is-left
+                        i.fa.fa-lock
+            
+            #password.field
+                label.label(for='passwordConfirmation') Confirm Password
+                .control.has-icons-left
+                    input#passwordinput-0.input(name='passwordConfirmation' type='password' placeholder='********' required='required' min-length='8' max-length='16')
+                    span.icon.is-small.is-left
+                        i.fa.fa-lock
+
+            .field.is-grouped
+                .control
+                    //!NOTE: Do I need to add type=submit?
+                    button.button.is-link Submit
+                .control
+                    button.button.is-link.is-light Cancel
