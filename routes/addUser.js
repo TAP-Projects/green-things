@@ -3,7 +3,7 @@ var router = express.Router();
 
 /* GET create account page. */
 router.get('/', function(req, res, next) {
-    res.render('add-user', { title: 'Green Things' });
+    res.render('sign-up', { title: 'Green Things' });
 });
 
 /* POST new account */
