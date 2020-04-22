@@ -10,11 +10,11 @@ var db = require('./db');
 var homeRouter = require('./routes/index');
 var aboutRouter = require('./routes/about');
 var galleryRouter = require('./routes/gallery');
-var addUserRouter = require('./routes/addUser');
-var usersRouter = require('./routes/users');
 var userRouter = require('./routes/user');
+var usersRouter = require('./routes/users');
 
 var app = express();
+db.testConnection();
 
 // view engine setup
 app.set('views', [
@@ -34,9 +34,9 @@ app.use('/bulma', express.static(path.join(__dirname, 'node_modules/bulma/css'))
 app.use('/', homeRouter);
 app.use('/about', aboutRouter);
 app.use('/gallery', galleryRouter);
-app.use('/sign-up', addUserRouter);
+app.use('/sign-up', userRouter);
 app.use('/users', usersRouter);
-app.use('/users/:id', userRouter);
+
 
 // catch 404 and forward to error middleware
 app.use(function(req, res, next) {
