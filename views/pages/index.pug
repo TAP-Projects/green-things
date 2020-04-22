@@ -3,7 +3,8 @@ extends ../layout
 block content
   p.title= title
   p.subtitle Welcome to #{title}, a celebration of things that are green.
-  p 
-    a(href='/login' title='Log in') Please log in
+  p(style="margin-top:3em;") 
+    | Please 
+    a(href='/login' title='Log in') log in
     |. Don't have an account? 
-    a(href='/create-account' title='create account')  Sign up!
+    a(href='/sign-up' title='create account')  Sign up!

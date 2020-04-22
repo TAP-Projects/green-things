@@ -9,6 +9,7 @@ var db = require('./db');
 
 var homeRouter = require('./routes/index');
 var aboutRouter = require('./routes/about');
+var galleryRouter = require('./routes/gallery');
 var addUserRouter = require('./routes/addUser');
 var usersRouter = require('./routes/users');
 var userRouter = require('./routes/user');
@@ -30,38 +31,19 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/bulma', express.static(path.join(__dirname, 'node_modules/bulma/css')));
 
-// get_breadcrumbs generates breadcrumbs from each route
-// get_breadcrumbs = function(url) {
-//   // The root is HOME with url /
-//   var rtn = [{name: "HOME", url: "/"}],
-//   // An accumulator
-//       acc = "", // accumulative url
-//       arr = url.substring(1).split("/");
-
-//   for (i=0; i<arr.length; i++) {
-//       acc = i != arr.length-1 ? acc+"/"+arr[i] : null;
-//       rtn[i+1] = {name: arr[i].toUpperCase(), url: acc};
-//   }
-//   return rtn;
-// };
-
-// app.use(function(req, res, next) {
-//   req.breadcrumbs = get_breadcrumbs(req.originalUrl);
-//   next();
-// });
-
 app.use('/', homeRouter);
 app.use('/about', aboutRouter);
+app.use('/gallery', galleryRouter);
 app.use('/sign-up', addUserRouter);
 app.use('/users', usersRouter);
 app.use('/users/:id', userRouter);
 
-// catch 404 and forward to error middlewear
+// catch 404 and forward to error middleware
 app.use(function(req, res, next) {
   next(createError(404));
 });
 
-// error middlewear
+// error middleware
 app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
