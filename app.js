@@ -35,6 +35,7 @@ app.use('/', homeRouter);
 app.use('/about', aboutRouter);
 app.use('/gallery', galleryRouter);
 app.use('/sign-up', userRouter);
+app.use('/user', userRouter);
 app.use('/users', usersRouter);
 
 

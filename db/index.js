@@ -11,7 +11,7 @@ module.exports = {
         try {
             const connected = await pool.connect();
             console.log("Connected to ", connected.database);
-            await pool.end();
+            //await pool.end();
         } catch (err) {
             console.error(err);
         }

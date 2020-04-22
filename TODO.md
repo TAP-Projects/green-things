@@ -34,13 +34,14 @@
 
 #### DB Connect
 - Re-read the project structure article on the Node-Postgres site
+- Read about granting privileges
 - DONE: Write the pool script and export an object
-- Test the pool script
+- DONE: Test the pool script. NOTE: It's not enough to create the db, create the tables, and seed some data. You also need to grant privileges to the public to use SELECT on each table. 
 
 ### DB
 - Create a green_things database
-- DONE: Create models for the green_user and green_thing tables
 - Figure out how to setup a development db
 - Figure out how to seed the development db
+- DONE: Create models for the green_user and green_thing tables
 - DONE: Create a list of green things
 - DONE: Create a list of users

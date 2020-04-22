@@ -1,15 +1,10 @@
 extends ../layout
 
 block content
-    h1= title
-    p Welcome to #{title}, a celebration of things that are green.
-    p 
-        a(href='/login' title='Log in') Log in
-        |. Don't have an account, 
-        a(href='/create-account' title='create account') create one now.
+
     h2= pageTitle
     - console.log(results)
     each row in results
         p #{row.username} #{row.email}  
-            a(href=`/user/${u_id}/edit`) Edit | 
-            a(href=`/user/${u_id}/delete`) Delete
+            a(href=`/user/${green_user_id}/edit`) Edit | 
+            a(href=`/user/${green_user_id}/delete`) Delete
