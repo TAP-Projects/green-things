@@ -11,6 +11,8 @@
 - DONE: Make header and footer includes
 - DONE: Get my includes to show up!
 - DONE: Create a top level menu
+- DONE: Create a tile layout for content pages
+- 
 #### Routes
 #### DB Connect
 ### DB
