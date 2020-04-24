@@ -64,9 +64,11 @@ const findUsername = (username) => {
 		[username],
 		(error, results) => {
 			if (error) {
-				return next(error);
+				console.error(error);
+				return false;
 			}
 			console.log(results.rows[0]);
+			results.rows[0];
 		}
 	);
 };
@@ -79,9 +81,11 @@ const findEmail = (email) => {
 		[email],
 		(error, results) => {
 			if (error) {
-				return next(error);
+				console.error(error);
+				return false;
 			}
 			console.log(results.rows[0]);
+			results.rows[0];
 		}
 	);
 }

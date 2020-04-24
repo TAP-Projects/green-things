@@ -1,6 +1,10 @@
 extends layout
 
 block content
-  h1= message
-  h2= error.status
-  pre #{error.stack}
+  if errors
+    each err in errors
+      h1 Error in request #{err.location}. #{err.msg}
+  else
+    h1= message
+    h2= error.status
+    pre #{error.stack}
