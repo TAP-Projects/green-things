@@ -1,45 +1,99 @@
-const { checks, handleValidationErrors } = require('./validationMiddlewear');
-
-// Controllers to 
-
-// I'm having some confusion about routes versus views. These routes are all about CRUD stuff for one kind of database entity - a user. They're all about creating, retrieving, updating, and deleting users. BUT! I don't have a route to a view for viewing a user's profile here.
-
-// I have 4 routes, corresponding to 4 HTML verbs, corresponding to 4 db operations. I have a single view called 'sign up' that I need to behave differently when a new user navigates to it, versus when a logged in user navigates to it. When a new user visits, show the empty form. When a logged in user visits, show the filled in form and allow a user to edit details like name.
+/** @format */
 
 // Retrieve the sign up form page
-const getUser = (req, res, next) => {
-    // Is the user logged in?
-    if(true){
-        // Show the empty sign up form when a new user visits
-        res.render('sign-up', { title: 'Green Things' });
-    } else {
-        // Show the filled in form when a logged in user visits
+const getSignUp = (req, res, next) => {
+        // Show the sign up form
+        res.render("sign-up", { title: "Green Things" });
+};
 
-    }
+// Retrieve the user profile page
+function getUserProfile(req, res, next) {
+	const username = req.params.username;
 
+	// Using callbacks - bad!
+	// $1 represents the id we supply in the 2nd parameter
+	db.query(
+		"SELECT * FROM green_user WHERE username = $1;",
+		[username],
+		(error, results) => {
+			if (error) {
+				return next(error);
+			}
+			console.log(results.rows[0]);
+			res.status(200).render("profile-page", results.rows[0]);
+		}
+	);
 }
 
 // Create a user after submitting the sign up form page
-const postUser = (req, res, next) => {
-    res.render('sign-up', { title: 'Green Things' });
-}
+const addUser = (req, res, next) => {
+    try {
+		const { firstName, lastName, email, username, password } = req.body;
 
-// Update a user using the same 'sign up' form page
-const putUser = (req, res, next) => {
-    res.render('sign-up', { title: 'Green Things' });
-}
+		// Using callbacks - bad!
+		db.query(
+			"INSERT INTO public.green_user(first_name,last_name,email,username,passwd) VALUES($1,$2,$3,$4,$5);",
+			[firstName, lastName, email, username, password],
+			(error, results) => {
+				if (error) {
+					return next(error);
+				}
+				res.redirect(`/user/:${username}`);
+			}
+		);
+	} catch (err) {
+		console.error(err);
+	}
+};
+
+// Update user using the same 'sign up' form page
+const editUser = (req, res, next) => {
+	res.render("sign-up", { title: "Green Things" });
+};
 
 // Delete a user from the user-profile page, and redirect to a confirmation page.
 const deleteUser = (req, res, next) => {
-    res.redirect();
+	res.redirect("/");
+};
+
+const findUsername = (username) => {
+	// Using callbacks - bad!
+	// $1 represents the url parameter we supply in the 2nd parameter
+	db.query(
+		"SELECT * FROM green_user WHERE username = $1;",
+		[username],
+		(error, results) => {
+			if (error) {
+				return next(error);
+			}
+			console.log(results.rows[0]);
+		}
+	);
+};
+
+const findEmail = (email) => {
+	// Using callbacks - bad!
+	// $1 represents the url parameter we supply in the 2nd parameter
+	db.query(
+		"SELECT * FROM green_user WHERE email = $1;",
+		[email],
+		(error, results) => {
+			if (error) {
+				return next(error);
+			}
+			console.log(results.rows[0]);
+		}
+	);
 }
 
 const userControllers = {
-    getUser,
-    postUser,
-    putUser,
-    deleteUser
-
-}
+    getSignUp,
+    getUserProfile,
+	addUser,
+	editUser,
+	deleteUser,
+    findUsername,
+    findEmail,
+};
 
 module.exports = userControllers;
