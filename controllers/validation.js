@@ -70,9 +70,8 @@ const handleValidationErrors = (req, res, next) => {
 	// Finds the validation errors in this request and wraps them in an object with handy functions
 	const errors = ev.validationResult(req);
 	if (!errors.isEmpty()) {
-		// There are errors. Render form again with sanitized values/errors messages.
-		// Error messages can be returned in an array using `errors.array()`.
-        return res.status(422).render("error", { errors: errors.array() });
+		// There are errors. Render form again with error messages.
+        return res.status(422).render("sign-up", { errors: errors.array() });
 	} else {
         // Data from form is valid, continue
         next();

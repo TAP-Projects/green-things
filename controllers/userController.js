@@ -1,5 +1,7 @@
 /** @format */
 
+const db = require("../db")
+
 // Retrieve the sign up form page
 const getSignUp = (req, res, next) => {
         // Show the sign up form
@@ -60,8 +62,8 @@ const findUsername = (username) => {
 	// Using callbacks - bad!
 	// $1 represents the url parameter we supply in the 2nd parameter
 	db.query(
-		"SELECT * FROM green_user WHERE username = $1;",
-		[username],
+		`SELECT * FROM green_user WHERE username = ${username};`,
+		null,
 		(error, results) => {
 			if (error) {
 				console.error(error);
@@ -77,8 +79,8 @@ const findEmail = (email) => {
 	// Using callbacks - bad!
 	// $1 represents the url parameter we supply in the 2nd parameter
 	db.query(
-		"SELECT * FROM green_user WHERE email = $1;",
-		[email],
+		`SELECT * FROM green_user WHERE email = ${email};`,
+		null,
 		(error, results) => {
 			if (error) {
 				console.error(error);
