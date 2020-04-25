@@ -1,55 +1,61 @@
 /** @format */
 
-const db = require("../db")
+//? Do we need public.green_user or just green_user? 
+//! NO. At least in getUserProfile, it works either way.
+//? When you add the SQL query, does it have to end in a semicolon? 
+//! NO. It works either way.
+//? In db.query can you deconstruct ...req.body rather than listing all of the form fields?
+//! ???
+//? Is it only a SELECT query that produces a results object with rows?
+//! ???
+
+const db = require("../db");
 
 // Retrieve the sign up form page
-const getSignUp = (req, res, next) => {
-        // Show the sign up form
-        res.render("sign-up", { title: "Green Things" });
+const getSignUp = async (req, res, next) => {
+	// Show the sign up form
+	res.render("sign-up", { title: "Green Things" });
 };
 
 // Retrieve the user profile page
-function getUserProfile(req, res, next) {
-	const username = req.params.username;
-
-	// Using callbacks - bad!
-	// $1 represents the id we supply in the 2nd parameter
-	db.query(
-		"SELECT * FROM green_user WHERE username = $1;",
-		[username],
-		(error, results) => {
-			if (error) {
-				return next(error);
-			}
-			console.log(results.rows[0]);
-			res.status(200).render("profile-page", results.rows[0]);
+const getUserProfile = async (req, res, next) => {
+	try {
+		const { username } = req.params;
+		const { rows } = await db.query(
+			"SELECT * FROM green_user WHERE username = $1;", 
+			[username]
+		);
+		console.log(rows);
+		if(rows.length > 0){
+			res.status(200).render("profile-page", rows[0]);
+		// If there are no public profiles, then only an admin will ever see this, but still.
+		} else {
+			const error = new Error("User Not Found");
+			error.status = 404;
+			next(error);
 		}
-	);
-}
+	} catch (err) {
+		console.error(err);
+	}
+};
 
 // Create a user after submitting the sign up form page
-const addUser = (req, res, next) => {
-    try {
-		const { firstName, lastName, email, username, password } = req.body;
-
-		// Using callbacks - bad!
-		db.query(
-			"INSERT INTO public.green_user(first_name,last_name,email,username,passwd) VALUES($1,$2,$3,$4,$5);",
-			[firstName, lastName, email, username, password],
-			(error, results) => {
-				if (error) {
-					return next(error);
-				}
-				res.redirect(`/user/:${username}`);
-			}
+const addUser = async (req, res, next) => {
+	console.log(req);
+	try {
+		const {first_name, last_name, email, username, password} = req.body;
+		const result = await db.query(
+			"INSERT INTO public.green_user(first_name, last_name, email, username, passwd) VALUES($1,$2,$3,$4,$5);",
+			[first_name, last_name, email, username, password]
 		);
+		res.redirect(`/`);
 	} catch (err) {
 		console.error(err);
 	}
 };
 
 // Update user using the same 'sign up' form page
-const editUser = (req, res, next) => {
+const editUser = async (req, res, next) => {
 	res.render("sign-up", { title: "Green Things" });
 };
 
@@ -58,48 +64,42 @@ const deleteUser = (req, res, next) => {
 	res.redirect("/");
 };
 
-const findUsername = (username) => {
-	// Using callbacks - bad!
-	// $1 represents the url parameter we supply in the 2nd parameter
-	db.query(
-		`SELECT * FROM green_user WHERE username = ${username};`,
-		null,
-		(error, results) => {
-			if (error) {
-				console.error(error);
-				return false;
-			}
-			console.log(results.rows[0]);
-			results.rows[0];
-		}
-	);
+const findUsername = async (username) => {
+	try {
+		// $1 represents the url parameter we supply in the 2nd parameter
+		const userExists = await db.query(
+			`SELECT * FROM public.green_user WHERE username = $1;`,
+			[username]
+		);
+		console.log(userExists);
+		return userExists;
+	} catch (error) {
+		console.error(error);
+	}
 };
 
-const findEmail = (email) => {
-	// Using callbacks - bad!
-	// $1 represents the url parameter we supply in the 2nd parameter
-	db.query(
-		`SELECT * FROM green_user WHERE email = ${email};`,
-		null,
-		(error, results) => {
-			if (error) {
-				console.error(error);
-				return false;
-			}
-			console.log(results.rows[0]);
-			results.rows[0];
-		}
-	);
-}
+const findEmail = async (email) => {
+	try {
+		// $1 represents the url parameter we supply in the 2nd parameter
+		const userExists = await db.query(
+			`SELECT * FROM public.green_user WHERE email = $1;`,
+			[email]
+		);
+		console.log(userExists);
+		return userExists;
+	} catch (error) {
+		console.error(error);
+	}
+};
 
 const userControllers = {
-    getSignUp,
-    getUserProfile,
+	getSignUp,
+	getUserProfile,
 	addUser,
 	editUser,
 	deleteUser,
-    findUsername,
-    findEmail,
+	findUsername,
+	findEmail,
 };
 
 module.exports = userControllers;

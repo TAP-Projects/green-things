@@ -4,9 +4,7 @@ const Pool = require('pg').Pool;
 const pool = new Pool();
 
 module.exports = {
-    query: (text, params, callback) => {
-        return pool.query(text, params, callback);
-    },
+    query: (text, params) => pool.query(text, params),
     testConnection: async () => {
         try {
             const connected = await pool.connect();

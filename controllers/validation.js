@@ -10,28 +10,30 @@ const checks = [
     ev.check("first_name")
         .optional()
         .trim()
-        .isLength({ min:1, max:255 }),
+        .isLength({ max:255 }),
     // last name
     ev.check("last_name")
         .optional()
         .trim()
-        .isLength({ min:1, max:255 }),
+        .isLength({ max:255 }),
 	// email must be an email
     ev.check("email", "Invalid email.")
         .exists({checkFalsy: true, checkNull: true})
         .isEmail()
         .normalizeEmail()
         // Make sure it isn't already in use
-        .custom(value => {
-            //! Using promises right now
-            // Find the username in the db, and if found return error
-            return controller.findEmail(value)
-                .then(user => {
-                    if (user) {
-                        return Promise.reject('Email already in use');
-                    }
-                });
-        }),
+        /*.custom(async (value) => {
+            try {
+                // Find the username in the db, and if found return error
+                const userExists = await controller.findEmail(value);
+                if (userExists) {
+                    return Promise.reject('Email already in use');
+                }
+                return userExists;
+            } catch (error) {
+                console.error(error);
+            }
+        })*/,
     // username
     ev.check("username", "Invalid username.")
         .exists({checkFalsy: true, checkNull: true})
@@ -41,15 +43,17 @@ const checks = [
         .matches(/^[ -~]+$/)
         .withMessage('Username may contain printable ASCII characters only.')
         // Make sure it isn't already in use
-        .custom(value => {
-            // Find the username in the db, and if found return error
-            return controller.findUsername(value)
-                .then(user => {
-                    if (user) {
-                        return Promise.reject('Username already in use');
-                    }
-                });
-        }),
+        /*.custom(async (value) => {
+            try {
+                // Find the username in the db, and if found return error
+                const userExists = await controller.findUsername(value);
+                if (userExists) {
+                    return Promise.reject('Username already in use');
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        })*/,
 	// password must be at least 8 chars long, but no longer than 16
     ev.check("password", 'Invalid password.')
         .exists({checkFalsy: true, checkNull: true})

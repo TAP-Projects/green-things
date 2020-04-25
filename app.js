@@ -1,20 +1,18 @@
-var path = require('path');
-var config = require('dotenv').config()
-var createError = require('http-errors');
-var express = require('express');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var db = require('./db');
+const path = require('path');
+const config = require('dotenv').config()
+const createError = require('http-errors');
+const logger = require('morgan');
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 
-var homeRouter = require('./routes/index');
-var aboutRouter = require('./routes/about');
-var galleryRouter = require('./routes/gallery');
-var userRouter = require('./routes/user');
-var usersRouter = require('./routes/users');
+const express = require('express');
+const app = express();
 
-var app = express();
+const db = require('./db');
 db.testConnection();
+
+const mainRoutes = require('./routes');
+mainRoutes(app);
 
 // view engine setup
 app.set('views', [
@@ -30,14 +28,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/bulma', express.static(path.join(__dirname, 'node_modules/bulma/css')));
-
-app.use('/', homeRouter);
-app.use('/about', aboutRouter);
-app.use('/gallery', galleryRouter);
-app.use('/sign-up', userRouter);
-app.use('/user', userRouter);
-app.use('/users', usersRouter);
-
 
 // catch 404 and forward to error middleware
 app.use(function(req, res, next) {

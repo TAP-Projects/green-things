@@ -1,7 +1,8 @@
 /** @format */
 
 var express = require("express");
-var router = express.Router();
+const Router = require('express-promise-router');
+const router = new Router();
 const controller = require("../controllers/userController");
 const validation = require("../controllers/validation");
 
@@ -12,6 +13,11 @@ router.get("/", controller.getSignUp);
 router.get("/:username", controller.getUserProfile);
 
 /* POST sign up form */
-router.post("/", validation.checks, validation.handleValidationErrors, controller.addUser);
+router.post(
+    "/", 
+    //validation.checks, 
+    //validation.handleValidationErrors, 
+    controller.addUser
+);
 
 module.exports = router;
