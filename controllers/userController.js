@@ -1,14 +1,5 @@
 /** @format */
 
-//? Do we need public.green_user or just green_user? 
-//! NO. At least in getUserProfile, it works either way.
-//? When you add the SQL query, does it have to end in a semicolon? 
-//! NO. It works either way.
-//? In db.query can you deconstruct ...req.body rather than listing all of the form fields?
-//! ???
-//? Is it only a SELECT query that produces a results object with rows?
-//! ???
-
 const db = require("../db");
 
 // Retrieve the sign up form page
@@ -41,13 +32,14 @@ const getUserProfile = async (req, res, next) => {
 
 // Create a user after submitting the sign up form page
 const addUser = async (req, res, next) => {
-	console.log(req);
+	console.log("Here's request.body:", req.body);
 	try {
-		const {first_name, last_name, email, username, password} = req.body;
+		const {firstName, lastName, emailAddress, username, password} = req.body;
 		const result = await db.query(
-			"INSERT INTO public.green_user(first_name, last_name, email, username, passwd) VALUES($1,$2,$3,$4,$5);",
-			[first_name, last_name, email, username, password]
+			"INSERT INTO green_user(first_name, last_name, email, username, passwd) VALUES($1,$2,$3,$4,$5);",
+			[firstName, lastName, emailAddress, username, password]
 		);
+		console.log("The result is:", result);
 		res.redirect(`/`);
 	} catch (err) {
 		console.error(err);

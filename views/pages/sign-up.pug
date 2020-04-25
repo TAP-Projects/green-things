@@ -1,9 +1,10 @@
 extends ../layout
 
 block content
-    // Each input tag can receive either the is-success or is-danger class depending on validation result. There are also examples below of where icon and help messages should appear.
+    // Each input tag can receive either the is-success or is-danger class depending on validation result. The control div needs has-icons-right for the corresponding icons. There are also examples below of where icon and help messages should appear.
+    // I think I've been using the wrong form encoding. I was using multipart.
     .column.is-4
-        form.form-horizontal(method='POST' action='/sign-up' enctype='multipart/form-data')
+        form.form-horizontal(method='POST' action='/user' enctype='x-www-form-urlencoded')
             fieldset
                 legend.title Create Account
                 if errors
@@ -20,9 +21,9 @@ block content
                         input.input(name='lastName' type='text' placeholder='Last name' autocomplete="last-name" required='required')
 
                 .email.field
-                    label.label(for='email') Email
-                    .control.has-icons-left.has-icons-right
-                        input.input(name='email' type='email' placeholder='Email address' value='' autocomplete="email" required='required')
+                    label.label(for='emailAddress') Email
+                    .control.has-icons-left
+                        input.input(name='emailAddress' type='email' placeholder='Email address' autocomplete="email" required='required')
                         span.icon.is-small.is-left
                             i.fas.fa-envelope
                         //span.icon.is-small.is-right
