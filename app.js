@@ -1,4 +1,5 @@
 const path = require('path');
+const helmet = require('helmet')
 const config = require('dotenv').config()
 const createError = require('http-errors');
 const logger = require('morgan');
@@ -19,6 +20,7 @@ app.set('views', [
 ]);
 app.set('view engine', 'pug');
 
+app.use(helmet())
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
