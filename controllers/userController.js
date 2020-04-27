@@ -16,7 +16,6 @@ const getUserProfile = async (req, res, next) => {
 			"SELECT * FROM green_user WHERE username = $1;", 
 			[username]
 		);
-		console.log(rows);
 		if(rows.length > 0){
 			res.status(200).render("profile-page", rows[0]);
 		// If there are no public profiles, then only an admin will ever see this, but still.
@@ -32,14 +31,12 @@ const getUserProfile = async (req, res, next) => {
 
 // Create a user after submitting the sign up form page
 const addUser = async (req, res, next) => {
-	console.log("Here's request.body:", req.body);
 	try {
 		const {firstName, lastName, emailAddress, username, password} = req.body;
 		const result = await db.query(
 			"INSERT INTO green_user(first_name, last_name, email, username, passwd) VALUES($1,$2,$3,$4,$5);",
 			[firstName, lastName, emailAddress, username, password]
 		);
-		console.log("The result is:", result);
 		res.redirect(`/`);
 	} catch (err) {
 		console.error(err);
@@ -63,7 +60,6 @@ const findUsername = async (username) => {
 			`SELECT * FROM public.green_user WHERE username = $1;`,
 			[username]
 		);
-		console.log(userExists);
 		return userExists;
 	} catch (error) {
 		console.error(error);
@@ -77,7 +73,6 @@ const findEmail = async (email) => {
 			`SELECT * FROM public.green_user WHERE email = $1;`,
 			[email]
 		);
-		console.log(userExists);
 		return userExists;
 	} catch (error) {
 		console.error(error);

@@ -6,6 +6,6 @@ CREATE TABLE IF NOT EXISTS green_user(
     email VARCHAR(255) UNIQUE NOT NULL,
     username VARCHAR(255) UNIQUE NOT NULL,
     passwd VARCHAR(255) NOT NULL,
-    created_on TIMESTAMP NOT NULL,
-	last_login TIMESTAMP default current_timestamp
+    created_on TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	last_login TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
