@@ -7,21 +7,23 @@
     "startdev": "nodemon --inspect ./bin/www",
     "startdebug": "DEBUG=learning-postgres:* nodemon --inspect ./bin/www"
   },
+  "devDependencies": {
+    "debug": "^4",
+    "http-errors": "^1",
+    "nodemon": "^2.0.3"
+  },
   "dependencies": {
     "body-parser": "^1.19.0",
     "bulma": "^0.8.2",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
-    "debug": "^4",
     "dotenv": "^8.2.0",
     "express": "^4",
     "express-promise-router": "^3.0.3",
     "express-validator": "^6.4.0",
     "helmet": "^3.22.0",
-    "http-errors": "^1",
     "morgan": "^1.10.0",
-    "nodemon": "^2.0.3",
     "pg": "^8.0.3",
     "pug": "^2.0.4"
   }

@@ -1,8 +1,9 @@
 const path = require('path');
-const helmet = require('helmet')
-const config = require('dotenv').config()
+const config = require('dotenv').config();
 const createError = require('http-errors');
 const logger = require('morgan');
+const helmet = require('helmet');
+const compression = require('compression');
 const cookieParser = require('cookie-parser');
 const bodyParser = require('body-parser');
 
@@ -20,8 +21,9 @@ app.set('views', [
 ]);
 app.set('view engine', 'pug');
 
-app.use(helmet())
 app.use(logger('dev'));
+app.use(compression());
+app.use(helmet());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
