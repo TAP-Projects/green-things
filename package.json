@@ -9,7 +9,6 @@
   },
   "devDependencies": {
     "debug": "^4",
-    "http-errors": "^1",
     "nodemon": "^2.0.3"
   },
   "dependencies": {
@@ -23,6 +22,7 @@
     "express-promise-router": "^3.0.3",
     "express-validator": "^6.4.0",
     "helmet": "^3.22.0",
+    "http-errors": "^1",
     "morgan": "^1.10.0",
     "pg": "^8.0.3",
     "pug": "^2.0.4"
