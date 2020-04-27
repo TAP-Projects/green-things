@@ -6,14 +6,6 @@ block content
 
         h2.title Profile
 
-        .edit-delete.content
-            // Change edit to save after changes have been made
-            a.button.is-info.is-outlined(style="margin-right: 1em;") Edit
-            a.button.is-danger.is-outlined
-                span Delete
-                span.icon.is-small
-                    i.fas.fa-times
-
         .content
             p.firstName 
                 span.title.is-4 First Name: #{first_name}
@@ -27,5 +19,16 @@ block content
             p.username
                 span.title.is-4 Username: #{username}
 
-            .change-password
+            p.edit-delete.content
+                br
+                // Change edit to save after changes have been made
+                a.button.is-info.is-outlined(style="margin-right: 1em;")    
+                    span Edit
+                    span.icon.is-small
+                        i.fas.fa-edit
+                a.button.is-danger.is-outlined
+                    span Delete
+                    span.icon.is-small
+                        i.fas.fa-times
+            p.change-password.content
                 a.button.is-danger.is-outlined Change Password
