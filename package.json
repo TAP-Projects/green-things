@@ -8,7 +8,6 @@
     "startdebug": "DEBUG=learning-postgres:* nodemon --inspect ./bin/www"
   },
   "devDependencies": {
-    "debug": "^4",
     "nodemon": "^2.0.3"
   },
   "dependencies": {
@@ -17,6 +16,7 @@
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
+    "debug": "^4",
     "dotenv": "^8.2.0",
     "express": "^4",
     "express-promise-router": "^3.0.3",
