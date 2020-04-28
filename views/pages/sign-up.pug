@@ -9,6 +9,8 @@ block content
         form.form-horizontal(method='POST' action='/sign-up' enctype='x-www-form-urlencoded')
             fieldset
                 legend.title Create Account       
+                p All fields are required.
+                br
                 .first-name.field
                     label.label(for='firstName') First Name
                     .control.has-icons-left
@@ -22,10 +24,11 @@ block content
                         )
                         span.icon.is-small.is-right
                             i(class=`${errors ? "fas fa-exclamation-triangle" : ""}`)
-                    each error in errors
-                        - var isFName = error.param === "firstName" ? true : false
-                        if isFName
-                            p.help.is-danger=`${error.msg}`
+                    //- if errors
+                    //-     each error in errors
+                    //-         - var isFName = error.param === "firstName" ? true : false
+                    //-         if isFName
+                    //-             p.help.is-danger=`${error.msg}`
 
                 .last-name.field
                     label.label(for='lastName') Last Name
@@ -40,10 +43,11 @@ block content
                         )
                         span.icon.is-small.is-right
                             i(class=`${errors ? "fas fa-exclamation-triangle" : ""}`)
-                    each error in errors
-                        - var isLName = error.param === "lastName" ? true : false
-                        if isLName
-                            p.help.is-danger=`${error.msg}`
+                    //- if errors
+                    //-     each error in errors
+                    //-         - var isLName = error.param === "lastName" ? true : false
+                    //-         if isLName
+                    //-             p.help.is-danger=`${error.msg}`
 
                 .email.field
                     label.label(for='emailAddress') Email
@@ -60,10 +64,11 @@ block content
                             i.fas.fa-envelope
                         span.icon.is-small.is-right
                             i(class=`${errors ? "fas fa-exclamation-triangle" : ""}`)
-                    each error in errors
-                        - var isEmail = error.param === "email" ? true : false
-                        if isEmail
-                            p.help.is-danger=`${error.msg}`
+                    //- if errors
+                    //-     each error in errors
+                    //-         - var isEmail = error.param === "email" ? true : false
+                    //-         if isEmail
+                    //-             p.help.is-danger=`${error.msg}`
 
                 .username.field
                     label.label(for='username') Username
@@ -82,10 +87,11 @@ block content
                             i.fas.fa-user
                         span.icon.is-small.is-right
                             i(class=`${errors ? "fas fa-exclamation-triangle" : ""}`)
-                    each error in errors
-                        - var isUsername = error.param === "username" ? true : false
-                        if isUsername
-                            p.help.is-danger=`${error.msg}`
+                    //- if errors
+                    //-     each error in errors
+                    //-         - var isUsername = error.param === "username" ? true : false
+                    //-         if isUsername
+                    //-             p.help.is-danger=`${error.msg}`
 
                 .password.field
                     label.label(for='password') Password
@@ -104,10 +110,11 @@ block content
                             i.fa.fa-lock
                         span.icon.is-small.is-right
                             i(class=`${errors ? "fas fa-exclamation-triangle" : ""}`)
-                    each error in errors
-                        - var isPasswd = error.param === "password" ? true : false
-                        if isPasswd
-                            p.help.is-danger=`${error.msg}`
+                    //- if errors    
+                    //-     each error in errors
+                    //-         - var isPasswd = error.param === "password" ? true : false
+                    //-         if isPasswd
+                    //-             p.help.is-danger=`${error.msg}`
                 
                 .password.field
                     label.label(for='password-confirmation') Confirm Password
@@ -126,10 +133,11 @@ block content
                             i.fa.fa-lock
                         span.icon.is-small.is-right
                             i(class=`${errors ? "fas fa-exclamation-triangle" : ""}`)
-                    each error in errors
-                        - var isPasswdConf = error.param === "password-confirmation" ? true : false
-                        if isPasswdConf
-                            p.help.is-danger=`${error.msg}`
+                    //- if errors    
+                    //-     each error in errors
+                    //-         - var isPasswdConf = error.param === "password-confirmation" ? true : false
+                    //-         if isPasswdConf
+                    //-             p.help.is-danger=`${error.msg}`
 
                 .field.is-grouped
                     .control

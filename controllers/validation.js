@@ -7,17 +7,17 @@ const controller = require("./userController");
 
 const checks = [
     // first name
-    ev.check("first_name")
-        .optional()
+    ev.check("firstName")
+        .exists({checkFalsy: true, checkNull: true})
         .trim()
         .isLength({ max:255 }),
     // last name
-    ev.check("last_name")
-        .optional()
+    ev.check("lastName")
+        .exists({checkFalsy: true, checkNull: true})
         .trim()
         .isLength({ max:255 }),
 	// email must be an email
-    ev.check("email", "Invalid email.")
+    ev.check("emailAddress", "Invalid email.")
         .exists({checkFalsy: true, checkNull: true})
         .isEmail()
         .normalizeEmail()
@@ -67,7 +67,7 @@ const checks = [
         .withMessage('Password must contain at least one letter.'),
     ev.check("passwordConfirmation", "Passwords do not match.")
         // Make sure password confirmation matches password
-        .custom((value, {req}) => (value === req.body.password))
+        //!.custom((value, {req}) => (value === req.body.password))
 ];
 
 const handleValidationErrors = (req, res, next) => {
