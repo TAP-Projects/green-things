@@ -37,7 +37,7 @@ const addUser = async (req, res, next) => {
 			"INSERT INTO green_user(first_name, last_name, email, username, passwd) VALUES($1,$2,$3,$4,$5);",
 			[firstName, lastName, emailAddress, username, password]
 		);
-		res.redirect(`/`);
+		res.redirect(`/thank-you`);
 	} catch (err) {
 		console.error(err);
 	}

@@ -1,7 +1,7 @@
 extends ../layout
 
 block content
-
+    - console.log(errors, request)
     // Each input tag can receive either the is-success or is-danger class depending on validation result. The control div needs has-icons-right for the corresponding icons. There are also examples below of where icon and help messages should appear.
     // I think I've been using the wrong form encoding. I was using multipart.
     .column.is-4
@@ -22,13 +22,14 @@ block content
                             type='text' 
                             value=`${errors ? request.firstName : ""}`
                         )
-                        span.icon.is-small.is-right
-                            i(class=`${errors ? "fas fa-exclamation-triangle" : ""}`)
-                    //- if errors
-                    //-     each error in errors
-                    //-         - var isFName = error.param === "firstName" ? true : false
-                    //-         if isFName
-                    //-             p.help.is-danger=`${error.msg}`
+                        if errors
+                            each error in errors
+                                - console.log(error.msg)
+                                - var isFName = (error.param === "firstName") ? true : false
+                                if isFName
+                                    span.icon.is-small.is-right.has-text-danger
+                                        i.fas.fa-exclamation-triangle
+                                    p.help.is-danger=`${error.msg}`
 
                 .last-name.field
                     label.label(for='lastName') Last Name
@@ -41,13 +42,13 @@ block content
                             type='text' 
                             value=`${errors ? request.lastName : ""}`
                         )
-                        span.icon.is-small.is-right
-                            i(class=`${errors ? "fas fa-exclamation-triangle" : ""}`)
-                    //- if errors
-                    //-     each error in errors
-                    //-         - var isLName = error.param === "lastName" ? true : false
-                    //-         if isLName
-                    //-             p.help.is-danger=`${error.msg}`
+                        if errors
+                            each error in errors
+                                - var isLName = error.param === "lastName" ? true : false
+                                if isLName
+                                    span.icon.is-small.is-right.has-text-danger
+                                        i.fas.fa-exclamation-triangle
+                                    p.help.is-danger=`${error.msg}`
 
                 .email.field
                     label.label(for='emailAddress') Email
@@ -62,13 +63,13 @@ block content
                         )
                         span.icon.is-small.is-left
                             i.fas.fa-envelope
-                        span.icon.is-small.is-right
-                            i(class=`${errors ? "fas fa-exclamation-triangle" : ""}`)
-                    //- if errors
-                    //-     each error in errors
-                    //-         - var isEmail = error.param === "email" ? true : false
-                    //-         if isEmail
-                    //-             p.help.is-danger=`${error.msg}`
+                        if errors
+                            each error in errors
+                                - var isEmail = error.param === "emailAddress" ? true : false
+                                if isEmail
+                                    span.icon.is-small.is-right.has-text-danger
+                                        i.fas.fa-exclamation-triangle
+                                    p.help.is-danger=`${error.msg}`
 
                 .username.field
                     label.label(for='username') Username
@@ -85,13 +86,13 @@ block content
                         )
                         span.icon.is-small.is-left
                             i.fas.fa-user
-                        span.icon.is-small.is-right
-                            i(class=`${errors ? "fas fa-exclamation-triangle" : ""}`)
-                    //- if errors
-                    //-     each error in errors
-                    //-         - var isUsername = error.param === "username" ? true : false
-                    //-         if isUsername
-                    //-             p.help.is-danger=`${error.msg}`
+                        if errors
+                            each error in errors
+                                - var isUsername = (error.param === "username") ? true : false
+                                if isUsername
+                                    span.icon.is-small.is-right.has-text-danger
+                                        i.fas.fa-exclamation-triangle
+                                    p.help.is-danger=`${error.msg}`
 
                 .password.field
                     label.label(for='password') Password
@@ -108,36 +109,36 @@ block content
                         )
                         span.icon.is-small.is-left
                             i.fa.fa-lock
-                        span.icon.is-small.is-right
-                            i(class=`${errors ? "fas fa-exclamation-triangle" : ""}`)
-                    //- if errors    
-                    //-     each error in errors
-                    //-         - var isPasswd = error.param === "password" ? true : false
-                    //-         if isPasswd
-                    //-             p.help.is-danger=`${error.msg}`
+                        if errors    
+                            each error in errors
+                                - var isPasswd = (error.param === "password" && error.msg.length > 0) ? true : false
+                                if isPasswd
+                                    span.icon.is-small.is-right.has-text-danger
+                                        i.fas.fa-exclamation-triangle
+                                    p.help.is-danger=`${error.msg}`
                 
                 .password.field
-                    label.label(for='password-confirmation') Confirm Password
+                    label.label(for='passwordConfirmation') Confirm Password
                     .control.has-icons-left
                         input.input(
                             autocomplete="new-password" 
-                            id='password-confirmation' 
+                            id='passwordConfirmation' 
                             max-length='16'
                             min-length='8' 
-                            name='password-confirmation' 
+                            name='passwordConfirmation' 
                             placeholder='********' 
                             required='required' 
                             type='password' 
                         )
                         span.icon.is-small.is-left
                             i.fa.fa-lock
-                        span.icon.is-small.is-right
-                            i(class=`${errors ? "fas fa-exclamation-triangle" : ""}`)
-                    //- if errors    
-                    //-     each error in errors
-                    //-         - var isPasswdConf = error.param === "password-confirmation" ? true : false
-                    //-         if isPasswdConf
-                    //-             p.help.is-danger=`${error.msg}`
+                        if errors    
+                            each error in errors
+                                - var isPasswdConf = error.param === "passwordConfirmation" ? true : false
+                                if isPasswdConf
+                                    span.icon.is-small.is-right.has-text-danger
+                                        i.fas.fa-exclamation-triangle
+                                    p.help.is-danger=`${error.msg}`
 
                 .field.is-grouped
                     .control

@@ -10,13 +10,17 @@ const checks = [
     ev.check("firstName")
         .exists({checkFalsy: true, checkNull: true})
         .trim()
-        .isLength({ max:255 }),
+        .isAlpha()
+        .withMessage('Please use the English alphabet only.')
+        .isLength({ max:100 }),
     // last name
     ev.check("lastName")
         .exists({checkFalsy: true, checkNull: true})
+        .isAlpha()
+        .withMessage('Please use the English alphabet only.')
         .trim()
-        .isLength({ max:255 }),
-	// email must be an email
+        .isLength({ max:100 }),
+	// email
     ev.check("emailAddress", "Invalid email.")
         .exists({checkFalsy: true, checkNull: true})
         .isEmail()
@@ -37,8 +41,10 @@ const checks = [
     // username
     ev.check("username", "Invalid username.")
         .exists({checkFalsy: true, checkNull: true})
-        .isLength({ min:4, max:16 })
-        .withMessage('Username must be between 4 and 16 characters in length.')
+        .isLength({ min:3, max:16 })
+        .withMessage('Username must be between 3 and 16 characters in length.')
+        .isAlpha()
+        .withMessage('Please use the English alphabet only.')
         // Allow only printable ASCII characters
         .matches(/^[ -~]+$/)
         .withMessage('Username may contain printable ASCII characters only.')
@@ -54,7 +60,7 @@ const checks = [
                 console.error(error);
             }
         })*/,
-	// password must be at least 8 chars long, but no longer than 16
+	// password
     ev.check("password", 'Invalid password.')
         .exists({checkFalsy: true, checkNull: true})
         .isLength({ min: 8, max: 16 })
@@ -66,8 +72,7 @@ const checks = [
         .matches(/[a-zA-Z]/)
         .withMessage('Password must contain at least one letter.'),
     ev.check("passwordConfirmation", "Passwords do not match.")
-        // Make sure password confirmation matches password
-        //!.custom((value, {req}) => (value === req.body.password))
+        .custom((value, {req}) => (value === req.body.password))
 ];
 
 const handleValidationErrors = (req, res, next) => {
