@@ -10,6 +10,8 @@
 - Figure out how to post a simple form to Express
 - Switch synchronous functions to async in app and routes. E.g. my db.query() calls are using callbacks right now
 - Add some sort of success indicator to the sign up form
+- Send email on successful sign up
+- Ask for email verification?
 
 
 #### Views

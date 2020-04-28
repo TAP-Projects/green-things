@@ -15,8 +15,8 @@ router.get("/:username", controller.getUserProfile);
 /* POST sign up form */
 router.post(
     "/", 
-    //validation.checks, 
-    //validation.handleValidationErrors, 
+    validation.checks, 
+    validation.handleValidationErrors, 
     controller.addUser
 );
 

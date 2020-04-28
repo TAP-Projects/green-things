@@ -1,63 +1,138 @@
 extends ../layout
 
 block content
+
     // Each input tag can receive either the is-success or is-danger class depending on validation result. The control div needs has-icons-right for the corresponding icons. There are also examples below of where icon and help messages should appear.
     // I think I've been using the wrong form encoding. I was using multipart.
     .column.is-4
+        
         form.form-horizontal(method='POST' action='/sign-up' enctype='x-www-form-urlencoded')
             fieldset
-                legend.title Create Account
-                if errors
-                    each err in errors
-                        p.help.is-danger= err.msg
+                legend.title Create Account       
                 .first-name.field
                     label.label(for='firstName') First Name
-                    .control
-                        input.input(name='firstName' type='text' placeholder='First name' autocomplete="first-name" required='required')
+                    .control.has-icons-left
+                        input.input(
+                            autocomplete="first-name" 
+                            name='firstName' 
+                            placeholder='First name' 
+                            required='required' 
+                            type='text' 
+                            value=`${errors ? request.firstName : ""}`
+                        )
+                        span.icon.is-small.is-right
+                            i(class=`${errors ? "fas fa-exclamation-triangle" : ""}`)
+                    each error in errors
+                        - var isFName = error.param === "firstName" ? true : false
+                        if isFName
+                            p.help.is-danger=`${error.msg}`
 
                 .last-name.field
                     label.label(for='lastName') Last Name
-                    .control
-                        input.input(name='lastName' type='text' placeholder='Last name' autocomplete="last-name" required='required')
+                    .control.has-icons-left
+                        input.input(
+                            autocomplete="last-name" 
+                            name='lastName' 
+                            placeholder='Last name' 
+                            required='required' 
+                            type='text' 
+                            value=`${errors ? request.lastName : ""}`
+                        )
+                        span.icon.is-small.is-right
+                            i(class=`${errors ? "fas fa-exclamation-triangle" : ""}`)
+                    each error in errors
+                        - var isLName = error.param === "lastName" ? true : false
+                        if isLName
+                            p.help.is-danger=`${error.msg}`
 
                 .email.field
                     label.label(for='emailAddress') Email
                     .control.has-icons-left
-                        input.input(name='emailAddress' type='email' placeholder='Email address' autocomplete="email" required='required')
+                        input.input(
+                            autocomplete="email" 
+                            name='emailAddress' 
+                            placeholder='Email address' 
+                            required='required' 
+                            type='email' 
+                            value=`${errors ? request.emailAddress : ""}`
+                        )
                         span.icon.is-small.is-left
                             i.fas.fa-envelope
-                        //span.icon.is-small.is-right
-                            i.fas.fa-exclamation-triangle
-                    //p.help.is-danger This email is invalid
+                        span.icon.is-small.is-right
+                            i(class=`${errors ? "fas fa-exclamation-triangle" : ""}`)
+                    each error in errors
+                        - var isEmail = error.param === "email" ? true : false
+                        if isEmail
+                            p.help.is-danger=`${error.msg}`
 
                 .username.field
                     label.label(for='username') Username
-                    .control.has-icons-left.has--right
-                        input.input(name='username' type='text' placeholder='Username' autocomplete="username" value='Username' required='required' min-length='4' max-length='16')
+                    .control.has-icons-left
+                        input.input(
+                            autocomplete="username" 
+                            max-length='16' 
+                            min-length='4' 
+                            name='username' 
+                            placeholder='Username' 
+                            required='required' 
+                            type='text' 
+                            value=`${errors ? request.username : ""}`
+                        )
                         span.icon.is-small.is-left
                             i.fas.fa-user
-                        //span.icon.is-small.is-right
-                            i.fas.fa-check
-                    //p.help.is-success This username is available
-                    //p.help.is-danger This username is not available
+                        span.icon.is-small.is-right
+                            i(class=`${errors ? "fas fa-exclamation-triangle" : ""}`)
+                    each error in errors
+                        - var isUsername = error.param === "username" ? true : false
+                        if isUsername
+                            p.help.is-danger=`${error.msg}`
 
                 .password.field
                     label.label(for='password') Password
                     .control.has-icons-left
-                        input.input(name='password' id='password' type='password' autocomplete="new-password" placeholder='********' required='required' min-length='8' max-length='16')
-                        //span.icon.is-small.is-left
+                        input.input(
+                            autocomplete="new-password" 
+                            id='password' 
+                            max-length='16'
+                            min-length='8' 
+                            name='password' 
+                            placeholder='********' 
+                            required='required' 
+                            type='password' 
+                        )
+                        span.icon.is-small.is-left
                             i.fa.fa-lock
+                        span.icon.is-small.is-right
+                            i(class=`${errors ? "fas fa-exclamation-triangle" : ""}`)
+                    each error in errors
+                        - var isPasswd = error.param === "password" ? true : false
+                        if isPasswd
+                            p.help.is-danger=`${error.msg}`
                 
                 .password.field
                     label.label(for='password-confirmation') Confirm Password
                     .control.has-icons-left
-                        input.input(name='password-confirmation' id='password-confirmation' type='password' autocomplete="new-password" placeholder='********' required='required' min-length='8' max-length='16')
-                        //span.icon.is-small.is-left
+                        input.input(
+                            autocomplete="new-password" 
+                            id='password-confirmation' 
+                            max-length='16'
+                            min-length='8' 
+                            name='password-confirmation' 
+                            placeholder='********' 
+                            required='required' 
+                            type='password' 
+                        )
+                        span.icon.is-small.is-left
                             i.fa.fa-lock
+                        span.icon.is-small.is-right
+                            i(class=`${errors ? "fas fa-exclamation-triangle" : ""}`)
+                    each error in errors
+                        - var isPasswdConf = error.param === "password-confirmation" ? true : false
+                        if isPasswdConf
+                            p.help.is-danger=`${error.msg}`
 
                 .field.is-grouped
                     .control
-                        //!NOTE: Do I need to add type=submit?
                         button.button.is-link(type="submit") Submit
                     .control
                         button.button.is-link.is-light Cancel

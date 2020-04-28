@@ -75,7 +75,7 @@ const handleValidationErrors = (req, res, next) => {
 	const errors = ev.validationResult(req);
 	if (!errors.isEmpty()) {
 		// There are errors. Render form again with error messages.
-        return res.status(422).render("sign-up", { errors: errors.array() });
+        return res.status(422).render("sign-up", { errors: errors.array(), request: req.body });
 	} else {
         // Data from form is valid, continue
         next();
