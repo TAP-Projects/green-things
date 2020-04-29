@@ -6,22 +6,24 @@
 
 #### Misc
 - Write pagination middleware
-- Write validation and sanitizing middleware for users
-- Figure out how to post a simple form to Express
-- Switch synchronous functions to async in app and routes. E.g. my db.query() calls are using callbacks right now
-- Add some sort of success indicator to the sign up form
+- DONE: Write validation and sanitizing middleware for users
+- DONE: Figure out how to post a simple form to Express
+- DONE: Switch synchronous functions to async in app and routes. E.g. my db.query() calls are using callbacks right now
+- DONE: Add some sort of success indicator to the sign up form
 - Send email on successful sign up
 - Ask for email verification?
 
 
 #### Views
+- Create a log in view
 - Create a form/edit view for green things
 - Create a single thing view
 - Add pagination to gallery and users
 
 ##### Front End JS
 - Write burger script
-- Write the class switching script for the form validation
+- Write the class switching script for form validation on the client side
+- DONE: Write the class switching script for the form validation on the server side
 
 #### Routes
 
@@ -29,6 +31,7 @@
 - Create edit user route
 - Create delete user route
 - Create admin only list all users route
+- Create a login route
 - DONE: Create create user route
 - DONE: Create view user route (can't yet edit or delete)
 ##### Thing Routes

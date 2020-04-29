@@ -25,21 +25,21 @@ const getUserProfile = async (req, res, next) => {
 			next(error);
 		}
 	} catch (err) {
-		console.error(err);
+		next(err);
 	}
 };
 
 // Create a user after submitting the sign up form page
 const addUser = async (req, res, next) => {
 	try {
-		const {firstName, lastName, emailAddress, username, password} = req.body;
+		const {firstName, lastName, emailAddress, username, hashed} = req.body;
 		const result = await db.query(
 			"INSERT INTO green_user(first_name, last_name, email, username, passwd) VALUES($1,$2,$3,$4,$5);",
-			[firstName, lastName, emailAddress, username, password]
+			[firstName, lastName, emailAddress, username, hashed]
 		);
 		res.redirect(`/thank-you`);
 	} catch (err) {
-		console.error(err);
+		next(err);
 	}
 };
 
@@ -79,6 +79,19 @@ const findEmail = async (email) => {
 	}
 };
 
+const login = async (req, res, next) => {
+	try {
+		const fine = await db.query(
+			`SELECT username FROM green_user WHERE username = $1 AND passwd = $2;`,
+			// req.compared is set in the hashPassword script in compare()
+			[req.body.username, req.compared]
+		);
+		return userExists;
+	} catch (error) {
+		next(error);
+	}
+};
+
 const userControllers = {
 	getSignUp,
 	getUserProfile,
@@ -87,6 +100,7 @@ const userControllers = {
 	deleteUser,
 	findUsername,
 	findEmail,
+	login
 };
 
 module.exports = userControllers;

@@ -1,4 +1,5 @@
 const homeRouter = require('./home');
+const loginRouter = require('./login');
 const aboutRouter = require('./about');
 const galleryRouter = require('./gallery');
 const userRouter = require('./user');
@@ -7,6 +8,7 @@ const usersRouter = require('./users');
 
 module.exports = app => {
     app.use('/', homeRouter);
+    app.use('/log-in', loginRouter);
     app.use('/about', aboutRouter);
     app.use('/gallery', galleryRouter);
     app.use('/sign-up', userRouter);

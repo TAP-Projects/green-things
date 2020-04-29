@@ -4,7 +4,8 @@ var express = require("express");
 const Router = require('express-promise-router');
 const router = new Router();
 const controller = require("../controllers/userController");
-const validation = require("../controllers/validation");
+const validate = require("../middlewares/validateSignUpForm");
+const hash = require("../middlewares/hashPassword");
 
 /* GET sign up form */
 router.get("/", controller.getSignUp);
@@ -15,8 +16,9 @@ router.get("/:username", controller.getUserProfile);
 /* POST sign up form */
 router.post(
     "/", 
-    validation.checks, 
-    validation.handleValidationErrors, 
+    validate.checks, 
+    validate.handleValidationErrors, 
+    hash,
     controller.addUser
 );
 

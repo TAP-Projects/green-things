@@ -3,7 +3,7 @@
 // Validate and sanitize user data on account creation or update
 
 const ev = require("express-validator");
-const controller = require("./userController");
+const controller = require("../controllers/userController");
 
 const checks = [
     // first name
