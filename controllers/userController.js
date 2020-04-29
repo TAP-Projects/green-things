@@ -79,19 +79,6 @@ const findEmail = async (email) => {
 	}
 };
 
-const login = async (req, res, next) => {
-	try {
-		const fine = await db.query(
-			`SELECT username FROM green_user WHERE username = $1 AND passwd = $2;`,
-			// req.compared is set in the hashPassword script in compare()
-			[req.body.username, req.compared]
-		);
-		return userExists;
-	} catch (error) {
-		next(error);
-	}
-};
-
 const userControllers = {
 	getSignUp,
 	getUserProfile,
@@ -99,8 +86,7 @@ const userControllers = {
 	editUser,
 	deleteUser,
 	findUsername,
-	findEmail,
-	login
+	findEmail
 };
 
 module.exports = userControllers;
